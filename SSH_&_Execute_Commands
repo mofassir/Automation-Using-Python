@@ -1,0 +1,50 @@
+import pexpect
+import sys
+import os
+
+# Set the username for ssh connection
+
+username = 'admin@appqa-4-05'
+
+# Take a valid password from the user
+
+Password = input("Enter the login password of %s: " %username)
+
+
+# Run ssh command using spawn
+  
+child = pexpect.spawn('ssh ' + username)
+
+#child.logfile = sys.stdout
+
+
+
+# Wait for the password
+
+child.expect('Password:')
+
+# Send the password taken from the user
+
+child.sendline(Password)
+
+
+# print the output for all commands 
+
+child.logfile_read = sys.stdout.buffer
+
+
+child.expect('>')
+child.sendline("enable")
+child.expect('#')
+
+server =child.sendline("show ssh server")
+
+child.expect('#')
+
+users = child.sendline("show users")
+
+child.expect('#')
+
+
+child.sendline("exit")
+
