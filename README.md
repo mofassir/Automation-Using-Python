@@ -1,1 +1,1 @@
-Automation scipts written using Python pexpect module.
+Automation scipts written using Python.
